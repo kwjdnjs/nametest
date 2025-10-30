@@ -8,7 +8,11 @@ pipeline {
         }
         stage("Build") {
           steps {
-            sh "./gradlew build"
+            sh '''
+            apt-get update
+            apt-get install -y openjdk-17-jdk
+            ./gradlew clean build
+            '''
           }
         }
         stage("Unittest") {
